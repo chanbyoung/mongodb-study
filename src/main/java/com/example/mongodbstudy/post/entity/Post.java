@@ -3,7 +3,7 @@ package com.example.mongodbstudy.post.entity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.example.mongodbstudy.post.dto.PostAddDto;
+import com.example.mongodbstudy.post.dto.PostDto;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -27,11 +27,17 @@ public class Post {
 		this.author = author;
 	}
 
-	public static Post from(PostAddDto postAddDto) {
+	public static Post from(PostDto postDto) {
 		return Post.builder()
-			.title(postAddDto.title())
-			.content(postAddDto.content())
-			.author(postAddDto.author())
+			.title(postDto.title())
+			.content(postDto.content())
+			.author(postDto.author())
 			.build();
+	}
+
+	public void updatePost(PostDto postDto) {
+		this.title = postDto.title();
+		this.content = postDto.content();
+		this.author = postDto.author();
 	}
 }
